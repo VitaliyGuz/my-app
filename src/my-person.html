@@ -1,0 +1,53 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/app-storage/app-indexeddb-mirror/app-indexeddb-mirror.html">
+<link rel="import" href="../bower_components/polymerfire/polymerfire.html">
+
+<dom-module id="my-person">
+
+    <template>
+        <style>
+            :host {
+                display: block;
+                padding: 16px;
+            }
+        </style>
+        <h1>People</h1>
+        <firebase-document
+                id="document"
+                app-name="firebase-app"
+                path="[[editablePersonId]]"
+                data="{{editablePerson}}">
+        </firebase-document>
+        <firebase-query
+                id="query"
+                app-name="firebase-app"
+                path="/people"
+                data="{{people}}">
+        </firebase-query>
+        <app-indexeddb-mirror
+                session="[[user.uid]]"
+                key="people"
+                data="{{people}}"
+                persisted-data="{{persistedPeople}}">
+        </app-indexeddb-mirror>
+        <template is="dom-repeat" items="[[persistedPeople]]" as="person">
+            <person-note
+                    id$="[[person.$key]]"
+                    name="[[person.name]]"
+                    dateOfBirth="[[person.dateOfBirth]]"
+                    number="[[person.number]]"
+                    on-tap="edit">
+            </person-note>
+        </template>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'my-person',
+            properties: {
+                route: Object
+            }
+        });
+    </script>
+
+</dom-module>

@@ -46,9 +46,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         navigator.serviceWorker.register('/service-worker.js');
       });
     }
-
+    
   </script>
 
+  <link rel="import" href="/bower_components/polymerfire/firebase-app.html">
   <link rel="import" href="/src/my-app.html">
 
   <style>
@@ -65,7 +66,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 </head>
 <body>
-
+  <firebase-app
+          name="firebase-app"
+          api-key="AIzaSyCJc4mfNg1uwdSux5glNsYS6Vn285MikTM"
+          auth-domain="firstpolymerproject.firebaseapp.com"
+          database-url="https://firstpolymerproject.firebaseio.com">
+  </firebase-app>
   <my-app></my-app>
 
 </body>
